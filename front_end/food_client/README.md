@@ -12,7 +12,7 @@ Currently, two official plugins are available:
 
 - Cài google fonts:
   - link: `https://fonts.google.com/selection/embed`
-- Cài react router dom:
-  -
+- ## Cài react router dom:
 - Cài thư viện daisyUI:
   `npm i -D daisyui@latest`
+- `npm install react-hook-form`

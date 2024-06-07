@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import logo from "/logo.png";
-import { BiPhoneCall } from "react-icons/bi";
-import { useEffect } from 'react';
+import { FaRegUser } from "react-icons/fa";
+import Modal from './Modal';
+import { AuthContext } from '../contexts/AuthProvider';
+import Profile from './Profile';
 
 function NavBar() {
   const menuItems = [
@@ -28,6 +30,9 @@ function NavBar() {
       </>
   )
   const [sticky, setSticky] = useState(false)
+  const { user } = useContext(AuthContext)
+  console.log(user);
+
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -76,8 +81,13 @@ function NavBar() {
               <span className="badge badge-sm indicator-item">8</span>
             </div>
           </div>
-          {/** btn */}
-          <a className="btn rounded-full bg-green px-6 flex items-center gap-2 text-white"><BiPhoneCall /> Contact</a>
+          {/** login btn */}
+          {
+            user ? <Profile user={user} /> : <button
+              onClick={() => document.getElementById('my_modal_5').showModal()}
+              className="btn rounded-full bg-green px-6 flex items-center gap-2 text-white"><FaRegUser /> Login</button>
+          }
+          <Modal />
         </div>
       </div>
     </header>
