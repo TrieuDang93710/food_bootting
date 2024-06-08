@@ -13,8 +13,10 @@ function Menu() {
   useEffect(() => {
     // Fetch data from the backend
     const fetchData = async () => {
+      const url = "http://localhost:3000/menu"
+      const json = "/menu.json"
       try {
-        const response = await fetch("/menu.json");
+        const response = await fetch(url && json);
         const data = await response.json();
         setMenu(data);
         setFilteredItems(data); // Initially, display all items
