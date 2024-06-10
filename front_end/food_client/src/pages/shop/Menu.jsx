@@ -16,7 +16,7 @@ function Menu() {
       const url = "http://localhost:3000/menu"
       const json = "/menu.json"
       try {
-        const response = await fetch(url && json);
+        const response = await fetch(url);
         const data = await response.json();
         setMenu(data);
         setFilteredItems(data); // Initially, display all items
