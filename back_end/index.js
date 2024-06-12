@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
 
 dotenv.config();
 
@@ -125,22 +126,22 @@ mongoose
  */
 
 // jwt authentication
-// app.post("/jwt", async (req, res) => {
-//   const user = req.body;
-//   const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-//     expiresIn: "1hr",
-//   });
-//   res.send({ token });
-// });
+app.post("/jwt", async (req, res) => {
+  const user = req.body;
+  const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: "1hr",
+  });
+  res.send({ token });
+});
 
 // import router
 const menuRouter = require("./api/router/menuRouter");
 const cartRouter = require("./api/router/cartRouter");
-// const userRouter = require("./api/router/userRouter");
+const userRouter = require("./api/router/userRouter");
 
 app.use("/menu", menuRouter);
 app.use("/cart", cartRouter);
-// app.use("/user", userRouter);
+app.use("/user", userRouter);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server is running...${process.env.PORT}`);

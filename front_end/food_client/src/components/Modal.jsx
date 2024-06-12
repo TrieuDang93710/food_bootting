@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import axios from 'axios'
 import { useForm } from "react-hook-form";
 import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -12,7 +13,7 @@ function Modal() {
 
   // Rediraation to home page or Specifig page
   const location = useLocation()
-  const navigation = useNavigate()
+  const navigate = useNavigate()
   const from = location.state?.from?.pathname || "/"
 
   // Login with form
@@ -21,9 +22,19 @@ function Modal() {
     const password = data.password
     login(email, password).then((res) => {
       const user = res.user
-      alert("Login with form successfull!")
+      const userInfor = {
+        name: data.name,
+        email: data.email,
+      };
+      axios
+        .post("http://localhost:3000/user", userInfor)
+        .then((response) => {
+          // console.log(response);
+          alert("Signin successful!");
+          // navigate(from, { replace: true });
+          navigate("/");
+        });
       document.getElementById("my_modal_5").close()
-      navigation(from, { relative: true })
     }).catch((error) => {
       const errorMessage = error.message
       setErrorMessage("Provider a correct email and password")

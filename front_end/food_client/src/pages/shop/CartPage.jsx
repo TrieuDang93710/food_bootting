@@ -178,7 +178,7 @@ function CartPage() {
       <div className='my-15 flex flex-col md:flex-row items-center justify-around'>
         <div className='md:w-1/2 space-y-3'>
           <h3 className='font-medium'>Customer Details</h3>
-          <p>Name: None</p>
+          <p>Name: {user.displayName}</p>
           <p>Email: {user.email}</p>
           <p>User_id: {user.uid}</p>
         </div>
